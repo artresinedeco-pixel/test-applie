@@ -1,0 +1,35 @@
+APPLICATION ANDROID - FIAT 500 ABARTH (etape 1, version 0.1)
+============================================================
+
+Ce que fait l'application (etape 1)
+- Veille : heure et date ; toucher l'ecran pour ouvrir le menu
+- Menu : 8 tuiles (Tableau de bord, Pression turbo, Connexion OBD, Pannes,
+  Performances, Moteur, Log, Reglages) ; les pages non finies affichent "bientot"
+- Tableau de bord : regime, vitesse, rapport, relevés
+- Pression turbo : cadran et pression relative
+- Connexion OBD : ELM327 Wi-Fi, bouton Connecter, mode demo
+- Pannes : lecture des codes defaut ; effacement seulement apres confirmation
+- Performances : pics de vitesse, pression et regime ; chrono 0 a 100
+
+Ce qui n'est PAS inclus dans cette version (etape 2)
+- Moteur (avance, sonde lambda, admission, debit, pression carburant)
+- Jeux (Snake, ping-pong, a l'arret seulement)
+- Log des sorties
+- Reglages (seuils, unites, apparence, alertes, Wi-Fi, mode Sport)
+
+Avant de lancer
+1. Dans les reglages Wi-Fi du telephone, connectez-vous au reseau "WiFi_OBDII"
+   (mot de passe souvent vide ou 123456). Le telephone peut afficher
+   "pas d'acces internet" : choisissez de rester connecte.
+2. Branchez l'adaptateur ELM327 Wi-Fi dans la prise OBD de la voiture, contact mis.
+
+Installation
+1. Ouvrir le dossier ObdFiat500Android dans Android Studio (Hedgehog ou plus recent).
+2. Laisser Android Studio telecharger le SDK et Gradle (au premier lancement).
+3. Brancher le telephone en USB (mode developpeur active) puis cliquer sur Run.
+   Ou : Build > Build APK(s) pour obtenir un fichier .apk a installer.
+
+Remarques
+- Compilee sans erreur sur PC (APK debug). Pas encore testee sur telephone ni sur la voiture.
+- L'adresse 192.168.0.10 et le port 35000 correspondent a l'ELM327 habituel. Modifiez-les
+  dans ObdClient.kt si besoin.
