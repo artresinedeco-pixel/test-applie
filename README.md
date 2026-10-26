@@ -28,6 +28,17 @@ Sans voiture, le **mode démonstration** affiche des valeurs simulées pour test
 - Un adaptateur ELM327 Wi-Fi (adresse 192.168.0.10, port 35000 par défaut).
 - Un téléphone Android (dossier `android/`) ou un iPhone (dossier racine, projet SwiftUI).
 
+## Télécharger l'appli
+
+**Android** (fichier APK, sans passer par le Play Store) :
+https://github.com/artresinedeco-pixel/test-applie/raw/main/android/apk/Fiat500Abarth-etape2-debug.apk
+
+Ouvrez ce lien sur le téléphone, téléchargez le fichier puis installez-le. Le téléphone peut demander
+d'autoriser l'installation depuis le navigateur (Paramètres → Sécurité → Installer des applis inconnues).
+
+**iPhone** : pas encore disponible en téléchargement direct. L'installation sur iPhone demande un compte
+développeur Apple ; le code est compilable sur GitHub (voir plus bas).
+
 ## Gratuit et ouvert
 
 L'appli est gratuite : aucun abonnement, aucune publicité, aucune donnée envoyée à l'extérieur.
