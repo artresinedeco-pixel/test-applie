@@ -1,0 +1,21 @@
+name: Compilation iOS
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installer XcodeGen
+        run: brew install xcodegen
+      - name: Générer le projet Xcode
+        run: xcodegen generate
+      - name: Compiler pour simulateur iPhone (sans signature)
+        run: |
+          xcodebuild -project ObdFiat500.xcodeproj \
+            -scheme ObdFiat500 \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build

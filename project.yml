@@ -1,0 +1,22 @@
+name: ObdFiat500
+options:
+  bundleIdPrefix: com.wyl
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  ObdFiat500:
+    type: application
+    platform: iOS
+    sources:
+      - ObdFiat500
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.wyl.fiat500
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "0.1"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        INFOPLIST_KEY_CFBundleDisplayName: "Fiat 500 Abarth"
+        INFOPLIST_KEY_NSLocalNetworkUsageDescription: "Connexion à l'adaptateur ELM327 Wi-Fi de la voiture."
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad: "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"

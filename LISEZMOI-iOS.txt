@@ -1,0 +1,52 @@
+APPLI iPHONE - FIAT 500 ABARTH (version 0.1, même écrans que la version Android étape 2)
+=====================================================================================
+
+Ce code n'a PAS été compilé. Deux façons de le compiler :
+
+A. Sans Mac, avec GitHub (recommandé) :
+   1. Créer un dépôt GitHub (privé) et y mettre le contenu du dossier ObdFiat500iOS.
+   2. Onglet Actions : le workflow "Compilation iOS" se lance tout seul au premier envoi
+      (ou bouton Run workflow). Il tourne sur un Mac virtuel et génère le projet
+      avec project.yml, puis compile pour le simulateur sans signature.
+   3. En cas d'erreur, le journal de l'étape "Compiler..." indique le fichier et la ligne.
+
+B. Avec un Mac : suivre les étapes manuelles ci-dessous (Xcode).
+Il reprend les écrans et la logique de la version Android (étape 2).
+
+Fichiers
+- ObdFiat500App.swift : point d'entrée
+- Modele.swift        : état, boucle de mise à jour, journal, jeux (serpent, ping-pong)
+- ObdClient.swift     : connexion à l'ELM327 Wi-Fi (192.168.0.10:35000), lecture et pannes
+- Ecrans.swift        : toutes les pages (veille, menu, tableau de bord, turbo, moteur,
+                        journal, réglages, OBD, pannes, performances, jeux)
+
+Création du projet dans Xcode (sur Mac)
+1. Xcode > File > New > Project > iOS > App. Interface : SwiftUI. Langage : Swift.
+   Nom du produit : ObdFiat500. Identifiant : com.wyl.fiat500.
+2. Supprimer ContentView.swift et ObdFiat500App.swift créés par défaut.
+3. Ajouter les 4 fichiers .swift du dossier ObdFiat500 au projet (glisser-déposer).
+4. Cible (target) ObdFiat500 > General > Minimum Deployments : iOS 16.0 ou plus.
+5. Cible > General > Supported Destinations / Orientations : ne garder que
+   Landscape Left et Landscape Right (affichage en paysage, 800 x 480).
+6. Cible > Info (ou Info.plist) : ajouter la clé
+      Privacy - Local Network Usage Description
+   avec la valeur : "Connexion à l'adaptateur ELM327 Wi-Fi de la voiture."
+   Sans cette clé, iOS bloque la connexion à 192.168.0.10.
+7. Brancher l'iPhone, le choisir comme destination, puis Run (Cmd+R).
+   La première fois, iOS demande d'autoriser la liaison avec les appareils
+   du réseau local : répondre Autoriser.
+
+Avant de lancer
+- Dans les réglages Wi-Fi de l'iPhone, rejoindre le réseau "WiFi_OBDII".
+- Avec le réseau Wi-Fi de l'ELM327 sans internet, iOS peut proposer de passer
+  en données mobiles : refuser ou désactiver "Passer aux données mobiles" pour
+  cette appli si besoin (la liaison reste en Wi-Fi, requiredInterfaceType = .wifi).
+- Brancher l'adaptateur ELM327 Wi-Fi dans la prise OBD, contact mis.
+
+Remarques
+- La connexion Wi-Fi n'est pas testée sur un iPhone réel : premier essai à faire
+  à l'arrêt, avec le contact mis.
+- Les valeurs sont simulées tant que "Démonstration" est actif (bouton OBD).
+- Le Bluetooth n'est pas utilisé : certains ELM327 Bluetooth ne fonctionnent
+  pas avec iOS sans adaptateur BLE. Le Wi-Fi reste la solution prévue.
+- Le code est volontairement simple : à améliorer après les premiers essais.
