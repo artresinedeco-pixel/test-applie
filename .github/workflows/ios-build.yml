@@ -13,13 +13,16 @@ jobs:
         run: xcodegen generate
       - name: Compiler pour simulateur iPhone (sans signature)
         run: |
-          set -o pipefail
           xcodebuild -project ObdFiat500.xcodeproj \
             -scheme ObdFiat500 \
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
-            build 2>&1 | tee "$GITHUB_WORKSPACE/build.log"
+            build > "$GITHUB_WORKSPACE/build.log" 2>&1
+          code=$?
+          grep -E "error:|warning: " "$GITHUB_WORKSPACE/build.log" | head -15 | sed 's/^/::error::/' || true
+          if [ $code -ne 0 ]; then tail -20 "$GITHUB_WORKSPACE/build.log" | sed 's/^/::error::/'; fi
+          exit $code
       - name: Sauvegarder le journal
         if: always()
         uses: actions/upload-artifact@v4
