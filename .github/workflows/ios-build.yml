@@ -18,14 +18,15 @@ jobs:
           xcodebuild -list -project ObdFiat500.xcodeproj 2>&1 | head -30 | sed 's/^/::notice::/' || true
       - name: Compiler pour simulateur iPhone (sans signature)
         run: |
+          code=0
           xcodebuild -project ObdFiat500.xcodeproj \
             -scheme ObdFiat500 \
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             -derivedDataPath "$RUNNER_TEMP/dd" \
             CODE_SIGNING_ALLOWED=NO \
-            build > "$GITHUB_WORKSPACE/build.log" 2>&1
-          code=$?
+            build > "$GITHUB_WORKSPACE/build.log" 2>&1 || code=$?
+          code=${code:-0}
           echo "::notice::code de sortie xcodebuild = $code"
           grep -E "error|warning: " "$GITHUB_WORKSPACE/build.log" | head -15 | sed 's/^/::error::/' || true
           if [ $code -ne 0 ]; then tail -20 "$GITHUB_WORKSPACE/build.log" | sed 's/^/::error::/'; fi
